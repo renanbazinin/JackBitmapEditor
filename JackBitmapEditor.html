@@ -584,17 +584,12 @@
         }
 
         generateCode = document.getElementById("generatedCode");
-        let subroutineName = document.getElementById("subroutineName").value;
-        if (document.getElementById("changeNameOnShift").checked) {
-          subroutineName =
-            subroutineName +
-            (Math.abs(currentJShift) / marginSaveFrames).toString();
-        }
+        // Fixed name/signature requirements
+        let subroutineName = "draw";
 
         if (document.getElementById("jackCode").checked) {
+          // Always generate a Jack function with this signature
           let subroutineType = "function";
-          if (document.getElementById("methodSubroutine").checked)
-            subroutineType = "method";
 
           generateCode.value =
             subroutineType +
@@ -619,7 +614,7 @@
             }
           }
           generateCode.value = generateCode.value + "\treturn;\n}";
-        } else {
+  } else {
           // hack assembly
           rowsOfWords = GetRowsFromWordColumns(colsOfWords);
           generateCode.value = "(" + subroutineName + ")\n";
@@ -916,7 +911,51 @@
     <table>
       <thead>
         <tr>
-          <th align="left">Bitmap</th>
+          <th align="left">
+            <form action="javascript:ResetSize()">
+              <label for="inputWidth">Canvase Size: </label>
+              <input
+                id="inputWidth"
+                placeholder="width"
+                maxlength="3"
+                size="3"
+                type="text"
+                value="48"
+              />
+              x
+              <input
+                id="inputHeight"
+                placeholder="height"
+                maxlength="3"
+                size="3"
+                type="text"
+                value="32"
+              />
+
+              <label for="pixelSize">Canvas pixel size: </label>
+              <input
+                id="pixelSize"
+                placeholder="px"
+                maxlength="2"
+                size="1"
+                type="text"
+                value="16"
+              />
+
+              <button
+                title="Resize Canvas Preserving Upper-left Contents"
+                formaction="javascript:SetSize()"
+              >
+                Resize
+              </button>
+              <button
+                title="Reset Canvas Size, Settings, and Clear Contents"
+                formaction="javascript:Reset()"
+              >
+                Reset
+              </button>
+            </form>
+          </th>
           <th align="left">
             <span id="codeTypeHeader">Generated Jack Code</span>
             <br />
@@ -1028,57 +1067,7 @@
           </tr>
         </table>
       </tr>
-      <tr>
-        <table>
-          <tr>
-            <td>
-              <form action="javascript:ResetSize()">
-                <label for="inputWidth">Canvase Size: </label>
-                <input
-                  id="inputWidth"
-                  placeholder="width"
-                  maxlength="3"
-                  size="3"
-                  type="text"
-                  value="48"
-                />
-                x
-                <input
-                  id="inputHeight"
-                  placeholder="height"
-                  maxlength="3"
-                  size="3"
-                  type="text"
-                  value="32"
-                />
-
-                <label for="pixelSize">Canvas pixel size: </label>
-                <input
-                  id="pixelSize"
-                  placeholder="px"
-                  maxlength="2"
-                  size="1"
-                  type="text"
-                  value="16"
-                />
-
-                <button
-                  title="Resize Canvas Preserving Upper-left Contents"
-                  formaction="javascript:SetSize()"
-                >
-                  Resize
-                </button>
-                <button
-                  title="Reset Canvas Size, Settings, and Clear Contents"
-                  formaction="javascript:Reset()"
-                >
-                  Reset
-                </button>
-              </form>
-            </td>
-          </tr>
-        </table>
-      </tr>
+      
       <tr>
         <table>
           <tr>
@@ -1150,7 +1139,7 @@
           </tr>
         </table>
       </tr>
-      <tr>
+  <tr hidden>
         <table>
           <tr>
             <td align="center">
@@ -1193,7 +1182,7 @@
           </tr>
         </table>
       </tr>
-      <tr>
+  <tr hidden>
         <table>
           <tr>
             <td align="center">
