@@ -910,7 +910,7 @@
     </p>
   
   <p></p>
-    <table>
+  <table id="layoutTable">
       <thead>
         <tr>
           <th align="left">
@@ -964,8 +964,7 @@
               <button type="button" id="jackTab" class="active" onclick="SwitchToJack()">Generate Jack code</button>
             </div>
           </th>
-        </tr>
-        <div id="style_stuff"></div>
+    </tr>
       </thead>
       <tr>
         <td><div id="grid" /></td>
@@ -1132,9 +1131,21 @@
       
         
         
-    </table>
+  </table>
+
+  <div id="style_stuff"></div>
 
     <style>
+      /* Ensure the layout table has no gaps between header and body, and no cell padding */
+      #layoutTable {
+        border-collapse: collapse;
+        border-spacing: 0;
+      }
+      #layoutTable th,
+      #layoutTable td {
+        padding: 0;
+      }
+
       .fileButton label {
         display: block;
         font:
@@ -1151,6 +1162,7 @@
       .code-tabs {
         margin: 0;
         padding: 0;
+        border-bottom: 1px solid #ccc; /* meets the textarea top border */
       }
       
       .code-tabs button {
@@ -1173,12 +1185,22 @@
         border-bottom: 1px solid white;
         position: relative;
         z-index: 1;
+        margin-bottom: -1px; /* overlap the tab strip border for seamless join */
       }
       
       #generatedCode {
         border: 1px solid #ccc;
         border-radius: 0 4px 4px 4px;
-        margin-top: -1px;
+        margin: 0;
+        display: block;
+      }
+
+      /* Tight vertical alignment between the header cell and code cell */
+      #layoutTable th {
+        vertical-align: bottom;
+      }
+      #layoutTable td {
+        vertical-align: top;
       }
     </style>
     <script>
