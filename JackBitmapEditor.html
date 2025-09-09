@@ -872,10 +872,16 @@
       // convenience helpers for toggle controls
       function SwitchToHack() {
         currentCodeMode = "hack";
+        // Update tab styling
+        document.getElementById("hackTab").classList.add("active");
+        document.getElementById("jackTab").classList.remove("active");
         ChangeCodeType();
       }
       function SwitchToJack() {
         currentCodeMode = "jack";
+        // Update tab styling
+        document.getElementById("jackTab").classList.add("active");
+        document.getElementById("hackTab").classList.remove("active");
         ChangeCodeType();
       }
       function UpdateMarginType() {
@@ -953,10 +959,10 @@
             </form>
           </th>
           <th align="left">
-            <span id="codeTypeHeader">Generated Jack Code</span>
-            <br />
-            <button type="button" onclick="SwitchToHack()">Generate Hack code</button>
-            <button type="button" onclick="SwitchToJack()">Generate Jack code</button>
+            <div class="code-tabs">
+              <button type="button" id="hackTab" onclick="SwitchToHack()">Generate Hack code</button>
+              <button type="button" id="jackTab" class="active" onclick="SwitchToJack()">Generate Jack code</button>
+            </div>
           </th>
         </tr>
         <div id="style_stuff"></div>
@@ -1139,6 +1145,40 @@
       .fileButton input,
       label {
         margin: 0.4rem 0;
+      }
+
+      /* Tab styling for code generation buttons */
+      .code-tabs {
+        margin: 0;
+        padding: 0;
+      }
+      
+      .code-tabs button {
+        background: #f0f0f0;
+        border: 1px solid #ccc;
+        border-bottom: none;
+        padding: 6px 12px;
+        margin-right: 2px;
+        cursor: pointer;
+        font-size: 12px;
+        border-radius: 4px 4px 0 0;
+      }
+      
+      .code-tabs button:hover {
+        background: #e0e0e0;
+      }
+      
+      .code-tabs button.active {
+        background: white;
+        border-bottom: 1px solid white;
+        position: relative;
+        z-index: 1;
+      }
+      
+      #generatedCode {
+        border: 1px solid #ccc;
+        border-radius: 0 4px 4px 4px;
+        margin-top: -1px;
       }
     </style>
     <script>
