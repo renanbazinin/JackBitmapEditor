@@ -878,6 +878,17 @@
         }
         GenerateCode();
       }
+      // convenience helpers for top-right controls
+      function SwitchToHack() {
+        var hack = document.getElementById("hackAssemblyCode");
+        if (!hack.checked) hack.checked = true;
+        ChangeCodeType();
+      }
+      function SwitchToJack() {
+        var jack = document.getElementById("jackCode");
+        if (!jack.checked) jack.checked = true;
+        ChangeCodeType();
+      }
       function UpdateMarginType() {
         if (document.getElementById("fitToDrawing").checked) {
           document.getElementById("marginSaveFramestd").hidden = false;
@@ -908,6 +919,9 @@
           <th align="left">Bitmap</th>
           <th align="left">
             <span id="codeTypeHeader">Generated Jack Code</span>
+            <br />
+            <button type="button" onclick="SwitchToHack()">Generate Hack code</button>
+            <button type="button" onclick="SwitchToJack()">Generate Jack code</button>
           </th>
         </tr>
         <div id="style_stuff"></div>
